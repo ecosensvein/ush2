@@ -1,0 +1,47 @@
+{% extends "shortener/base.html" %}
+{% block content %}
+
+
+<section class="form">
+    <div class="form_result"><span id="result">Enter your link below to be shorten.</span></div>
+    <input type="text" name="url" id="url" class="form_url" placeholder="Place for your URL is here" />
+    <input type="text" name="custom_subpart" id="custom_subpart" class="form_custom_subpart" placeholder="Subpart (optional)" />
+    <button id="shorten_btn" class="form_shorten_btn">Shorten link</button>
+</section>
+<section class="history">
+    {% if urls %}
+    <h2>History of your shortens (5 per page)</h2>
+    <div class="history_elements">
+        {% for url in urls %}
+        <div class="history_elements_element">
+            <span>{{ url.subpart_outer|slice:":100" }}</span>
+            <span><a target="_blank" href="{{ url.subpart_inner }}">{{ request.META.HTTP_HOST }}/{{ url.subpart_inner }}</a></span>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% if is_paginated %}
+    <ul class="history_pages">
+        {% if page_obj.has_previous %}
+        <li><a href="?page={{ page_obj.previous_page_number }}">back</a></li>
+        {% else %}
+        <li class="history_pages_disabled"><a href="#">back</a></li>
+        {% endif %}
+
+        {% for num in page_obj.paginator.page_range %}
+        {% ifequal num page_obj.number %}
+        <li class="history_pages_active"><a href="#">{{ num }}</a></li>
+        {% else %}
+        <li><a href="?page={{ num }}">{{ num }}</a></li>
+        {% endifequal %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+        <li><a href="?page={{ page_obj.next_page_number }}">next</a></li>
+        {% else %}
+        <li class="history_pages_disabled"><a href="#">next</a></li>
+        {% endif %}
+        <ul>
+            {% endif %}
+</section>
+{% endblock %}

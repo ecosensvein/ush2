@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>{% block title %}URL Shortner{% endblock %}</title>
+    {% load staticfiles %}
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,600" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'base.css' %}" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="{% static 'base.js' %}"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <main>
+        <h1><a href="{% url 'shortener:index' %}">URL SHORTENER app</a></h1>
+        {% block content %}
+        {% endblock %}
+    </main>
+</body>
+
+</html>

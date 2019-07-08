@@ -1,0 +1,51 @@
+version: '3.3'
+services:
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - 5555:3306
+    volumes:
+      - db_volume:/var/lib/mysql
+
+  redis:
+    image: "redis:alpine"
+
+  app:
+    build:
+      context: ./services/web
+      dockerfile: ./Dockerfile
+    volumes:
+      - ./services/web:/code
+    ports:
+      - 80:80
+    depends_on:
+      - db
+      - redis
+    command: ./entrypoint.sh
+    environment:
+      - DEBUG=1
+      - SECRET_KEY=0na)5)9a0rhevqf!^s7wrd35^rj$pa8(57zk=32-c(nz=io9f#
+      - SQL_ENGINE=django.db.backends.mysql
+      - SQL_DATABASE=ush
+      - SQL_USER=root
+      - SQL_PASSWORD=root
+      - SQL_HOST=db
+
+  celery:
+    build:
+      context: ./services/web
+      dockerfile: ./Dockerfile
+    volumes:
+      - ./services/web:/code
+    depends_on:
+      - db
+      - redis
+    command: ./celery.sh
+    environment:
+      - DEBUG=1
+      - SECRET_KEY=0na)5)9a0rhevqf!^s7wrd35^rj$pa8(57zk=32-c(nz=io9f#
+
+volumes:
+  db_volume:

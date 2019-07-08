@@ -1,0 +1,104 @@
+body {
+  display: grid;
+  grid-template-columns: 1fr 1200px 1fr;
+  grid-template-rows: auto;
+  background-color: rgb(188, 217, 222);
+  font-family: "Roboto",sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: rgb(0, 135, 255);
+}
+
+h1 a, h2 {
+  color: rgb(92, 166, 179);
+}
+
+main {
+  grid-row: 1;
+  grid-column: 2;
+  display: -ms-grid;
+  background-color: rgb(255, 255, 255);
+  margin: 20px 0;
+  padding: 20px 40px 40px 40px;
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.09), 3px 3px 1px -2px rgba(0,0,0,0.09), 0 1px 5px 0 rgba(0,0,0,0.1);
+}
+
+.form {
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.09), 3px 3px 1px -2px rgba(0,0,0,0.09), 0 1px 5px 0 rgba(0,0,0,0.1);
+  grid-row: 1;
+  grid-column: 2;
+  display: -ms-grid;
+  display: grid;
+  grid-template-columns: 600px 200px auto;
+  grid-template-rows: repeat(2,auto);
+  background-color: rgb(92, 166, 179);
+  margin: 20px 0px;
+  padding: 20px;
+  gap: 20px;
+}
+
+.form input, .form button {
+  border: none;
+  padding: 10px 20px;
+  font-size: 15px;
+}
+
+.form button {
+  background-color: rgb(1, 107, 125);
+  color: rgb(255, 255, 255);
+  font-weight: bold;
+}
+.form button:hover {
+  background-color: rgb(0, 65, 76);
+}
+
+.form_result {
+  grid-column: 1/4;
+  background-color: rgba(0, 0, 0, 0.15);
+  padding: 10px 20px;
+  color: rgb(255, 255, 255);
+  font-size: 20px;
+}
+
+.history_elements_element {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: auto;
+  background-color: rgb(234, 248, 251);
+  margin: 5px 0px;
+  padding: 20px;
+  gap: 20px;
+}
+.history_elements_element span:nth-child(1) {
+  color: rgb(1, 107, 125);
+}
+.history_elements_element span:nth-child(2) {
+  text-align: right;
+}
+.history_pages {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+}
+.history_pages a {
+  color: rgb(255, 255, 255);
+  display: block;
+  padding: 8px 15px;
+}
+.history_pages li {
+  background-color: rgb(1, 107, 125);
+  margin: 1px;
+  list-style: none;
+}
+.history_pages li:hover, .history_pages li.history_pages_active {
+  background-color: rgb(1, 60, 71);
+}
+.history_pages li.history_pages_disabled {
+  background-color: rgb(111, 165, 174);
+}
+.history_pages li.history_pages_disabled a {
+  cursor: not-allowed;
+}
